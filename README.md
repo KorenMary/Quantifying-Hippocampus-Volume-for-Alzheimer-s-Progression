@@ -18,7 +18,7 @@ Source: Life Science Databases (LSDB). Hippocampus. Images are from Anatomograph
 
 Humans have two hippocampi, one in each hemisphere of the brain. They are located in the medial temporal lobe of the brain. Fun fact - the word "hippocampus" is roughly translated from Greek as "horselike" because of the similarity to a seahorse observed by one of the first anatomists to illustrate the structure, but you can also see the comparison in the following image.
 
-![](RackMultipart20221113-1-pesno7_html_7480f2139d51e8ce.jpg)
+![](visualization/hippocampus_and_seahorse.jpg)
 
 Seahorse & Hippocampus
 
@@ -28,7 +28,7 @@ According to [Nobis et al., 2019](https://www.sciencedirect.com/science/article/
 
 You can see this in the image below where the right hippocampal volume of women across ages 52 - 71 is shown.
 
-![](RackMultipart20221113-1-pesno7_html_7286dd50a3a59fdb.jpg)
+![]()
 
 Nomogram - Female, Right Hippocampus Volume, Corrected for Head Size
 
