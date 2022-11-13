@@ -19,7 +19,7 @@ Source: Life Science Databases (LSDB). Hippocampus. Images are from Anatomograph
 Humans have two hippocampi, one in each hemisphere of the brain. They are located in the medial temporal lobe of the brain. Fun fact - the word "hippocampus" is roughly translated from Greek as "horselike" because of the similarity to a seahorse observed by one of the first anatomists to illustrate the structure, but you can also see the comparison in the following image.
 
 ![](visualization/hippocampus_and_seahorse.jpg)
-<img src="[https://your-image-url.type](https://commons.wikimedia.org/wiki/File:Hippocampus_and_seahorse.JPG)" width="100" height="100">
+<img src="[visualization/hippocampus_and_seahorse.jpg)" width="100" height="100">
 
 Seahorse & Hippocampus
 
