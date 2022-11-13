@@ -19,7 +19,6 @@ Source: Life Science Databases (LSDB). Hippocampus. Images are from Anatomograph
 Humans have two hippocampi, one in each hemisphere of the brain. They are located in the medial temporal lobe of the brain. Fun fact - the word "hippocampus" is roughly translated from Greek as "horselike" because of the similarity to a seahorse observed by one of the first anatomists to illustrate the structure, but you can also see the comparison in the following image.
 
 ![](visualization/hippocampus_and_seahorse.jpg)
-<img src="[visualization/hippocampus_and_seahorse.jpg)" width="100" height="100">
 
 Seahorse & Hippocampus
 
@@ -29,7 +28,7 @@ According to [Nobis et al., 2019](https://www.sciencedirect.com/science/article/
 
 You can see this in the image below where the right hippocampal volume of women across ages 52 - 71 is shown.
 
-![]()
+![](visualization/nomogram_fem.svg)
 
 Nomogram - Female, Right Hippocampus Volume, Corrected for Head Size
 
@@ -37,7 +36,7 @@ Source: Nobis, L., Manohar, S.G., Smith, S.M., Alfaro-Almagro, F., Jenkinson, M.
 
 There is one problem with measuring the volume of the hippocampus using MRI scans, though - namely, the process tends to be quite tedious since every slice of the 3D volume needs to be analyzed, and the shape of the structure needs to be traced. The fact that the hippocampus has a non-uniform shape only makes it more challenging. Do you think you could spot the hippocampi in this axial slice below?
 
-![](RackMultipart20221113-1-pesno7_html_92d7f90d2dfcc30c.jpg)
+![](visualization/mri_image.jpg)
 
 Axial slice of an MRI image of the brain
 
@@ -55,7 +54,7 @@ The proposed piece of AI software could be integrated into a clinical-grade view
 
 The suggested AI product could be applied to patients with early symptoms of Alzheimer's Disease Progression with the hippocampus of volumes (in mm³) that range from 2200 mm³ to 4500 mm³, independents of age and gender (as described in the following histogram).
 
-![](RackMultipart20221113-1-pesno7_html_2186b4466c23a241.png)
+![](visualization/hist.png)
 
 **Data description**
 
@@ -79,12 +78,12 @@ The ground truth labels were obtained from highly qualified radiologists, who ma
 
 The orange line represents a loss on the training set for each 10th batch and the blue one represents validation. Note, that the data which was used for validation is new and have never been used during the training phase.
 
-![](RackMultipart20221113-1-pesno7_html_780d9751483f1fcc.png)
+![](visualization/train_val_curve1.png)
 
 The average Dice metric on the test set is 0.9 and the Jacckard metric is 0.88.
 
 The resulting masks look as follows:
 
-![](RackMultipart20221113-1-pesno7_html_b2a3c9682e87f375.png)
+![](visualization/mask.png)
 
 The model is integrated into a working clinical PACS (Picture Archiving and Communication System) which can be applied on every study and generate a report with volume measurements.
