@@ -49,32 +49,18 @@ class UNetExperiment:
         self.val_loader = DataLoader(SlicesDataset(dataset[split["val"]]),
                 batch_size=config.batch_size, shuffle=True, num_workers=0)
 
-        # we will access volumes directly for testing
         self.test_data = dataset[split["test"]]
 
-        # Do we have CUDA available?
         if not torch.cuda.is_available():
             print("WARNING: No CUDA device is found. This may take significantly longer!")
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-        # Configure our model and other training implements
-        # We will use a recursive UNet model from German Cancer Research Center, 
-        # Division of Medical Image Computing. It is quite complicated and works 
-        # very well on this task. Feel free to explore it or plug in your own model
         self.model = UNet(num_classes=3)
         self.model.to(self.device)
-
-        # We are using a standard cross-entropy loss since the model output is essentially
-        # a tensor with softmax'd prediction of each pixel's probability of belonging 
-        # to a certain class
         self.loss_function = torch.nn.CrossEntropyLoss()
 
-        # We are using standard SGD method to optimize our weights
-        self.optimizer = optim.Adam(self.model.parameters(), lr=config.learning_rate)
-        # Scheduler helps us update learning rate automatically
-        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'min')
 
-        # Set up Tensorboard. By default it saves data into runs folder. You need to launch
+        self.optimizer = optim.Adam(self.model.parameters(), lr=config.learning_rate)
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'min')
         self.tensorboard_train_writer = SummaryWriter(comment="_train")
         self.tensorboard_val_writer = SummaryWriter(comment="_val")
 
@@ -86,21 +72,15 @@ class UNetExperiment:
         print(f"Training epoch {self.epoch}...")
         self.model.train()
 
-        # Loop over our minibatches
+
         for i, batch in enumerate(self.train_loader):
             self.optimizer.zero_grad()
 
-            # TASK: You have your data in batch variable. Put the slices as 4D Torch Tensors of 
-            # shape [BATCH_SIZE, 1, PATCH_SIZE, PATCH_SIZE] into variables data and target. 
-            # Feed data to the model and feed target to the loss function
-            # 
             data = batch['image'].to(self.device)
             target = batch['seg'].type(torch.LongTensor).to(self.device)
 
             prediction = self.model(data)
 
-            # We are also getting softmax'd version of prediction to output a probability map
-            # so that we can see how the model converges to the solution
             prediction_softmax = F.softmax(prediction, dim=1)
 
             loss = self.loss_function(prediction, target[:, 0, :, :])
@@ -109,7 +89,7 @@ class UNetExperiment:
             self.optimizer.step()
 
             if (i % 10) == 0:
-                # Output to console on every 10th batch
+         
                 print(f"\nEpoch: {self.epoch} Train loss: {loss}, {100*(i+1)/len(self.train_loader):.1f}% complete")
 
                 counter = 100*self.epoch + 100*(i/len(self.train_loader))
@@ -136,7 +116,7 @@ class UNetExperiment:
         """
         print(f"Validating epoch {self.epoch}...")
 
-        # Turn off gradient accumulation by switching model to "eval" mode
+
         self.model.eval()
         loss_list = []
 
@@ -153,7 +133,6 @@ class UNetExperiment:
 
                 print(f"Batch {i}. Data shape {data.shape} Loss {loss}")
 
-                # We report loss that is accumulated across all of validation set
                 loss_list.append(loss.item())
 
         self.scheduler.step(np.mean(loss_list))
@@ -201,10 +180,6 @@ class UNetExperiment:
         print("Testing...")
         self.model.eval()
 
-        # In this method we will be computing metrics that are relevant to the task of 3D volume
-        # segmentation. Therefore, unlike train and validation methods, we will do inferences
-        # on full 3D volumes, much like we will be doing it when we deploy the model in the 
-        # clinical environment. 
 
         inference_agent = UNetInferenceAgent(model=self.model, device=self.device)
 
